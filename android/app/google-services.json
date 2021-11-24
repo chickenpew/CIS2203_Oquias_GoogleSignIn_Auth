@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "549249396844",
+    "project_id": "authentication-mobdev-ass",
+    "storage_bucket": "authentication-mobdev-ass.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:549249396844:android:102d4b77c5f11db40c6849",
+        "android_client_info": {
+          "package_name": "com.oquias.authentication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "549249396844-6jp4qgijg5i1no5fpj9hv668rp8ucl41.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrfHmrh5OaJbgym627raSy-s2ikD3cgJI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "549249396844-6jp4qgijg5i1no5fpj9hv668rp8ucl41.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

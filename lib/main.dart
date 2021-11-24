@@ -1,13 +1,20 @@
+import 'package:basecode/screens/DashboardScreen.dart';
+import 'package:basecode/services/LocalStorageService.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import './screens/LoginScreen.dart';
 import './routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+Future main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await LocalStorageService.initialize();
   runApp(GetMaterialApp(
     theme: ThemeData(
       brightness: Brightness.dark,
       primaryColor: Colors.teal[700],
+      // ignore: deprecated_member_use
       accentColor: Colors.yellow[800],
       visualDensity: VisualDensity.adaptivePlatformDensity,
       textTheme: TextTheme(
@@ -17,6 +24,6 @@ void main() {
       ),
     ),
     getPages: routes,
-    initialRoute: LoginScreen.routeName,
+    initialRoute: LocalStorageService.isUserLoggedIn() ? DashboardScreen.routeName : LoginScreen.routeName,
   ));
 }
