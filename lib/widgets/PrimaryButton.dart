@@ -15,6 +15,7 @@ class PrimaryButton extends StatelessWidget {
       ),
       minWidth: double.maxFinite,
       height: 50,
+      // ignore: deprecated_member_use
       child: RaisedButton(
         onPressed: onPress,
         child: Row(

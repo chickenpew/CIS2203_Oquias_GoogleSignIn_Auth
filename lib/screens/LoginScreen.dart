@@ -19,9 +19,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class LoginScreenState extends State<LoginScreen> {
-  AuthService authService = AuthService();
+  AuthService _authService = AuthService();
   bool _obscureText = true;
   bool isLogginIn = false;
+
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -49,7 +53,7 @@ class LoginScreenState extends State<LoginScreen> {
                         labelText: "Email",
                         hintText: "Enter a valid email.",
                         iconData: FontAwesomeIcons.solidEnvelope,
-                        controller: TextEditingController()),
+                        controller: _emailController),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -62,7 +66,7 @@ class LoginScreenState extends State<LoginScreen> {
                         },
                         labelText: "Password",
                         hintText: "Enter your password",
-                        controller: TextEditingController()),
+                        controller: _passwordController),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -115,7 +119,7 @@ class LoginScreenState extends State<LoginScreen> {
         isLogginIn = true;
       });
 
-      var user = await authService.signInWithGoogle();
+      var user = await _authService.signInWithGoogle();
 
       if (user == null) {
         print("Invalid user credential");
@@ -124,13 +128,45 @@ class LoginScreenState extends State<LoginScreen> {
 
       // Saves displayName and UID locally
       LocalStorageService.setName(user.user.displayName);
-      LocalStorageService.setName(user.user.uid);
+      LocalStorageService.setUid(user.user.uid);
+      LocalStorageService.setRefreshToken(user.user.refreshToken);
+
 
       Get.offNamed(DashboardScreen.routeName);
     }catch(e){
       print(e.toString());
     }
-     setState(() {
+
+    setState(() {
+      isLogginIn = false;
+    });
+  }
+
+  loginWithEmailAndPassword() async {
+
+    try {
+      setState(() {
+        isLogginIn = true;
+      });
+
+      var user = await _authService.signInWithEmailandPassword(_emailController.value.text,_passwordController.value.text);
+      if (user == null) {
+        print("Invalid user credential");
+        return;
+      }
+
+        // Saves displayName and UID locally
+      LocalStorageService.setName(user.user.displayName);
+      LocalStorageService.setUid(user.user.uid);
+      LocalStorageService.setRefreshToken(user.user.refreshToken);
+
+      Get.offNamed(DashboardScreen.routeName);
+
+    } catch(e) {
+      print(e.toString());
+    }
+
+    setState(() {
       isLogginIn = false;
     });
   }

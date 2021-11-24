@@ -109,9 +109,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
                     PrimaryButton(
                         text: "Register",
                         iconData: FontAwesomeIcons.solidFolder,
-                        onPress: () {
-                          print("Register button");
-                        }),
+                        onPress: register),
                     SizedBox(
                       height: 20.0,
                     ),
@@ -139,7 +137,7 @@ class RegistrationScreenState extends State<RegistrationScreen> {
       ),
     );
   }
-  register() async{
+  void register() async{
     setState(() {
       _isLoading = true;
     });
